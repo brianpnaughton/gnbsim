@@ -6,10 +6,10 @@ import (
 )
 
 func (t *testSession) registerUE(ue *nas.UE) {
-	log.Printf("registerUE function called")
+	log.Printf("registerUE function called for %v",ue)
 
 	log.Printf("send registration request -->")
-	pdu := t.ue.MakeRegistrationRequest()
+	pdu := ue.MakeRegistrationRequest()
 	t.gnb.RecvfromUE(ue,&pdu)
 
 	log.Printf("send initial UE message -->")
@@ -19,7 +19,7 @@ func (t *testSession) registerUE(ue *nas.UE) {
 	t.recvfromAMF(0)
 
 	log.Printf("receive authentication response <--")
-	pdu = t.ue.MakeAuthenticationResponse()
+	pdu = ue.MakeAuthenticationResponse()
 	t.gnb.RecvfromUE(ue,&pdu)
 
 	log.Printf("send uplink NAS transport -->")
@@ -29,7 +29,7 @@ func (t *testSession) registerUE(ue *nas.UE) {
 	t.recvfromAMF(0)
 
 	log.Printf("receive security mode complete <--")
-	pdu = t.ue.MakeSecurityModeComplete()
+	pdu = ue.MakeSecurityModeComplete()
 	t.gnb.RecvfromUE(ue,&pdu)
 
 	log.Printf("send uplink NAS transport -->")
@@ -43,7 +43,7 @@ func (t *testSession) registerUE(ue *nas.UE) {
 	t.sendtoAMF(buf)
 
 	log.Printf("receive registration complete <--")
-	pdu = t.ue.MakeRegistrationComplete()
+	pdu = ue.MakeRegistrationComplete()
 	t.gnb.RecvfromUE(ue,&pdu)
 
 	log.Printf("send uplink NAS transport -->")
@@ -62,7 +62,7 @@ func (t *testSession) establishPDUSession(ue *nas.UE) {
 	log.Printf("establishPDUSession RAN function called")
 
 	log.Printf("receive PDU session <--")
-	pdu := t.ue.MakePDUSessionEstablishmentRequest()
+	pdu := ue.MakePDUSessionEstablishmentRequest()
 	t.gnb.RecvfromUE(ue,&pdu)
 
 	log.Printf("send uplink NAS transport -->")

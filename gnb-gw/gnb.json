@@ -57,6 +57,7 @@
 			"TAC": "0x000001"
 		}
 	},
-	"GTPuAddr": "10.100.200.100",
+	"NGAPPeerAddr": "10.100.200.22",
+	"GTPuLocalAddr": "10.100.200.100",
 	"GTPuIFname": "gtp-gnb"
 }
